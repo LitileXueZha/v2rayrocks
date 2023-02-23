@@ -1,0 +1,70 @@
+/**
+ * See https://primer.style/primitives/colors
+ */
+
+:root {
+    color-scheme: light;
+    color: var(--fg);
+    background-color: var(--canvas);
+    --canvas: #ffffff;
+    --fg: #24292f;
+    --fg-2: #afb8c1; /* secondary */
+    --fg-on: #ffffff;
+    --success: #2da44e;
+    --danger: #cf222e;
+    --blue: #0969da;
+    --blue-s: #ddf4ff;
+    --border: #d0d7de;
+    --shadow-s: 0 1px 0 rgba(27,31,36,0.04);
+    --shadow-m: 0 3px 6px rgba(140,149,159,0.15);
+    --shadow-l: 0 8px 24px rgba(140,149,159,0.2);
+    --shadow-xl: 0 12px 28px rgba(140,149,159,0.3);
+    --btn: rgba(175,184,193,0.2);
+    --input: #f6f8fa;
+    --alpha: rgba(255,255,255, .75);
+
+    --badge: rgba(175,184,193,0.2);
+    --toolbar: #f6f8fa;
+    --about: #54aeff;
+    --panel: linear-gradient(225deg, #fae17d, #eac54f);
+    --logbox: var(--fg);
+    --win: #ddf4ff;
+    --win-border: #80ccff;
+    --win-active: #b6e3ff;
+    --subs: #dd7815;
+
+    --radius: 6px;
+    --sp: 12px; /* basic space */
+    --code: Consolas, 'Microsoft YaHei', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        color: var(--fg);
+        background-color: var(--canvas);
+        --canvas: #0d1117;
+        --fg: #c9d1d9;
+        --fg-2: #8b949e;
+        --success: #238636;
+        --danger: #da3633;
+        --blue: #1f6feb;
+        --blue-s: rgba(56,139,253,0.15);
+        --border: #30363d;
+        --shadow-s: none;
+        --shadow-m: 0 3px 6px #010409;
+        --shadow-l: 0 8px 24px #010409;
+        --shadow-xl: 0 12px 48px #010409;
+        --btn: rgba(110,118,129,0.4);
+        --input: #010409;
+        --alpha: rgba(13,17,23, .75);
+
+        --badge: #21262d;
+        --toolbar: #161b22;
+        --panel: linear-gradient(to bottom, #693e00, #4b2900);
+        --logbox: #010409;
+        --win: rgba(163,113,247,0.15);
+        --win-border: #0d419d;
+        --win-active: rgba(163,113,247,0.3);
+    }
+}

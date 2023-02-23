@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑服务器 - V2rayrocks</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="p2">
+    <form class="body">
+        <div class="mark">
+            <span class="s-label">别名:</span>
+            <input class="v-m" type="text" name="mark" placeholder="输入名称">
+            <a id="json" role="button">编辑json配置</a>
+        </div>
+        <div class="simple">
+            <div><span class="title">基本信息</span></div>
+            <label>
+                <span class="s-label">地址 address:</span>
+                <input class="v-l" type="text" name="addr" placeholder="输入vmess服务器域名或IP" required>
+            </label>
+            <div class="s-mt4">
+                <span class="s-label">端口 port:</span>
+                <input class="v-s" type="text" name="port" required>
+            </div>
+            <div class="s-mt4">
+                <span class="s-label">用户 id 或密码:</span>
+                <input class="v-l" type="text" name="id" required>
+                <button class="btn s btn_press" id="uuid" type="button">生成 UUID</button>
+            </div>
+            <div class="s-mt4">
+                <span class="s-label">其它 alterId:</span>
+                <input class="v-s" type="text" name="aid" placeholder="0">
+            </div>
+            <div class="s-mt4">
+                <label class="s-label" for="security">加密 security:</label>
+                <select class="v-m" name="security" id="security">
+                    <option value="auto" selected>auto</option>
+                    <option value="aes-128-gcm">aes-128-gcm</option>
+                    <option value="chacha20-poly1305">chacha20-poly1305</option>
+                    <option value="none">none</option>
+                </select>
+            </div>
+            <div><span class="title">传输方式 streamSetting</span></div>
+            <div class="s-mt4 s-flex">
+                <label>
+                    <span class="s-label">传输协议 network:</span>
+                    <select class="v-s" name="network" id="network">
+                        <option value="tcp" selected>tcp</option>
+                        <option value="kcp">kcp</option>
+                        <option value="ws">ws</option>
+                        <option value="http">h2</option>
+                        <option value="quic">QUIC</option>
+                    </select>
+                </label>
+                <label>
+                    伪装类型 type:
+                    <select class="v-s" style="margin-left: 8px;" name="type" id="type">
+                        <option value="none" selected>none</option>
+                    </select>
+                </label>
+            </div>
+            <div class="s-mt4">
+                <span class="s-label">路径 path:</span>
+                <textarea
+                    class="v-l"
+                    name="path"
+                    cols="30"
+                    rows="3"
+                    placeholder="http/ws 路径&#10;kcp seed&#10;QUIC key 密钥"
+                ></textarea>
+            </div>
+            <div class="s-mt4">
+                <span class="s-label">服务器域名:</span>
+                <textarea
+                    class="v-l"
+                    name="host"
+                    cols="30"
+                    rows="3"
+                    placeholder="tls SNI 域名 servername&#10;ws header 域名 host&#10;QUIC 加密方式"
+                ></textarea>
+            </div>
+            <div class="s-mt8 s-flex">
+                <label>
+                    <span class="s-label">传输层加密:</span>
+                    <input type="checkbox" name="tls" checked>
+                    tls
+                </label>
+                <label>
+                    跳过证书检查:&nbsp;
+                    <input type="checkbox" name="allowInsecure">
+                    allowInsecure
+                </label>
+            </div>
+        </div>
+        <div class="advanced hidden">
+            <textarea name="json" placeholder="仅部分配置支持（与服务器相关）"></textarea>
+        </div>
+    </form>
+    <div class="footer">
+        <button id="save" class="btn primary btn_press">保存</button>
+        <button id="cancel" class="btn btn_press">取消</button>
+    </div>
+<script>
+async function onReady() {
+    const $cancel = document.getElementById('cancel');
+    $cancel.addEventListener('click', v2s.close);
+    const cfg = await v2s.readConfig();
+    const $form = document.forms[0];
+    const matches = location.search.match(/id=(\d+)/);
+    if (matches) {
+        const ss = cfg.servers.find((v) => v.i === matches[1]);
+        console.log(ss);
+        $form.mark.value = ss.mark;
+        $form.addr.value = ss.addr || ss.add;
+        $form.port.value = ss.port;
+        $form.id.value = ss.id || ss.token;
+        $form.aid.value = ss.aid || '';
+        if (ss.sec) {
+            $form.security.value = ss.sec;
+        }
+        if (ss.allowInsecure) {
+            $form.allowInsecure.checked = ss.allowInsecure == true;
+        }
+    }
+    const $save = document.getElementById('save');
+    const $uuid = document.getElementById('uuid');
+    $uuid.addEventListener('click', () => {
+        const uid = crypto.randomUUID();
+        $form.id.value = uid;
+    });
+    let simple = true;
+    const $json = document.getElementById('json');
+    const $simple = document.getElementsByClassName('simple')[0];
+    const $advanced = document.getElementsByClassName('advanced')[0];
+    const toggle = () => {
+        simple = !simple;
+        $simple.classList.toggle('hidden');
+        $advanced.classList.toggle('hidden');
+        $json.textContent = simple ? '编辑json配置' : '简化配置';
+    }
+    $json.addEventListener('click', toggle);
+}
+
+document.addEventListener('DOMContentLoaded', onReady);
+</script>
+</body>
+</html>

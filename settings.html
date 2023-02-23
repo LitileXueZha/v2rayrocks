@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - V2rayrocks</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="p3">
+    <div class="body">
+        <div class="tabs">
+            <div class="item active" data-id="core">基本配置</div>
+            <div class="item" data-id="pac">PAC 配置</div>
+            <div class="item" data-id="json">编辑 json 配置</div>
+            <a href="https://www.v2fly.org/config/overview.html" target="_blank" class="doc">官方文档</a>
+        </div>
+        <form class="form a-core">
+            <div class="core">
+                <div class="proxy">
+                    <span class="s-label">
+                        <svg class="icon"><use xlink:href="#pc" /></svg>
+                        系统代理：
+                    </span>
+                    <label>
+                        <input type="radio" name="proxy" value="off" checked>
+                        关闭
+                    </label>&emsp;
+                    <label>
+                        <input type="radio" name="proxy" value="pac">
+                        PAC 模式
+                    </label>&emsp;
+                    <label>
+                        <input type="radio" name="proxy" value="global">
+                        全局代理
+                    </label>
+                </div>
+                <div class="s-mt8 s-flex">
+                    <label>
+                        <span class="s-label">HTTP 代理端口：</span>
+                        <input type="text" class="v-s" name="port" value="10801">
+                    </label>
+                    <span>
+                        <label>
+                            <input type="checkbox" name="udp" checked>
+                            udp
+                        </label>
+                        <label style="margin-left: 20px;">
+                            <input type="checkbox" name="sniff" checked>
+                            流量探测
+                        </label>
+                        <label style="margin-left: 20px;">
+                            <input type="checkbox" name="mux" checked>
+                            mux
+                        </label>
+                    </span>
+                </div>
+                <div class="s-mt4">
+                    <label class="s-label">Socks5 代理：</label>
+                    <input type="text" class="v-l" disabled value="socks://127.0.0.1:10800">
+                </div>
+                <div class="s-mt8 s-flex">
+                    <label>
+                        <span class="s-label">记录本地日志：</span>
+                        <input type="checkbox" name="log">
+                        启用
+                    </label>
+                    <label>
+                        日志级别：
+                        <select name="logLevel" class="v-s" disabled>
+                            <option value="debug">debug</option>
+                            <option value="info">info</option>
+                            <option value="warning" selected>warning</option>
+                            <option value="error">error</option>
+                            <option value="none">none</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="s-mt4">
+                    <label class="s-label">内置 DNS：</label>
+                    <textarea name="dns" class="v-l" rows="5" placeholder="多个服务器用英文逗号 (,) 隔开"></textarea>
+                </div>
+                <div class="s-mt4 s-flex">
+                    <label>
+                        <span class="s-label">域名解析策略：</span>
+                        <select name="domainStrategy" class="v-m">
+                            <option value="AsIs" selected>AsIs</option>
+                            <option value="IPIfNonMatch">IPIfNonMatch</option>
+                            <option value="IPOnDemand">IPOnDemand</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="pac">
+                <div>
+                    <span style="user-select: none;">本地 PAC：</span>
+                    <span class="pac-url">
+                        http://127.0.0.1:10802/pac?t=<span id="nonce">254</span>
+                    </span>
+                    <svg class="icon" id="copyPac"><use xlink:href="#copy" /></svg>
+                </div>
+                <div class="s-mt4 s-flex">
+                    PAC 源地址：
+                    <input type="text" value="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt">
+                </div>
+                <div class="pac-rule">自定义 PAC 规则：</div>
+                <textarea name="pacRules" rows="15" placeholder="参考fastpac规则"></textarea>
+            </div>
+            <div class="json">
+                <div class="note">
+                    注意：此 json 配置可覆盖由 V2rayrocks 自动
+                    <a id="open" role="button">生成的配置</a>
+                    ，写错了可能会导致连接失败。参考多文件配置文档
+                </div>
+                <textarea name="extra" rows="15" placeholder="多文件配置"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <button class="btn btn_press primary">保存</button>
+        <button class="btn btn_press">取消</button>
+    </div>
+    <svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="layers" viewBox="0 0 512 512"><path fill="currentColor" d="M256 256c-13.47 0-26.94-2.39-37.44-7.17l-148-67.49C63.79 178.26 48 169.25 48 152.24s15.79-26 22.58-29.12l149.28-68.07c20.57-9.4 51.61-9.4 72.19 0l149.37 68.07c6.79 3.09 22.58 12.1 22.58 29.12s-15.79 26-22.58 29.11l-148 67.48C282.94 253.61 269.47 256 256 256Zm176.76-100.86Z"/><path fill="currentColor" d="M441.36 226.81L426.27 220l-38.77 17.74l-94 43c-10.5 4.8-24 7.19-37.44 7.19s-26.93-2.39-37.42-7.19l-94.07-43L85.79 220l-15.22 6.84C63.79 229.93 48 239 48 256s15.79 26.08 22.56 29.17l148 67.63C229 357.6 242.49 360 256 360s26.94-2.4 37.44-7.19l147.87-67.61c6.81-3.09 22.69-12.11 22.69-29.2s-15.77-26.07-22.64-29.19Z"/><path fill="currentColor" d="m441.36 330.8l-15.09-6.8l-38.77 17.73l-94 42.95c-10.5 4.78-24 7.18-37.44 7.18s-26.93-2.39-37.42-7.18l-94.07-43L85.79 324l-15.22 6.84C63.79 333.93 48 343 48 360s15.79 26.07 22.56 29.15l148 67.59C229 461.52 242.54 464 256 464s26.88-2.48 37.38-7.27l147.92-67.57c6.82-3.08 22.7-12.1 22.7-29.16s-15.77-26.07-22.64-29.2Z"/></symbol>
+        <symbol id="settings" viewBox="0 0 512 512"><circle cx="256" cy="256" r="48" fill="currentColor"/><path fill="currentColor" d="m470.39 300l-.47-.38l-31.56-24.75a16.11 16.11 0 0 1-6.1-13.33v-11.56a16 16 0 0 1 6.11-13.22L469.92 212l.47-.38a26.68 26.68 0 0 0 5.9-34.06l-42.71-73.9a1.59 1.59 0 0 1-.13-.22A26.86 26.86 0 0 0 401 92.14l-.35.13l-37.1 14.93a15.94 15.94 0 0 1-14.47-1.29q-4.92-3.1-10-5.86a15.94 15.94 0 0 1-8.19-11.82l-5.59-39.59l-.12-.72A27.22 27.22 0 0 0 298.76 26h-85.52a26.92 26.92 0 0 0-26.45 22.39l-.09.56l-5.57 39.67a16 16 0 0 1-8.13 11.82a175.21 175.21 0 0 0-10 5.82a15.92 15.92 0 0 1-14.43 1.27l-37.13-15l-.35-.14a26.87 26.87 0 0 0-32.48 11.34l-.13.22l-42.77 73.95a26.71 26.71 0 0 0 5.9 34.1l.47.38l31.56 24.75a16.11 16.11 0 0 1 6.1 13.33v11.56a16 16 0 0 1-6.11 13.22L42.08 300l-.47.38a26.68 26.68 0 0 0-5.9 34.06l42.71 73.9a1.59 1.59 0 0 1 .13.22a26.86 26.86 0 0 0 32.45 11.3l.35-.13l37.07-14.93a15.94 15.94 0 0 1 14.47 1.29q4.92 3.11 10 5.86a15.94 15.94 0 0 1 8.19 11.82l5.56 39.59l.12.72A27.22 27.22 0 0 0 213.24 486h85.52a26.92 26.92 0 0 0 26.45-22.39l.09-.56l5.57-39.67a16 16 0 0 1 8.18-11.82c3.42-1.84 6.76-3.79 10-5.82a15.92 15.92 0 0 1 14.43-1.27l37.13 14.95l.35.14a26.85 26.85 0 0 0 32.48-11.34a2.53 2.53 0 0 1 .13-.22l42.71-73.89a26.7 26.7 0 0 0-5.89-34.11Zm-134.48-40.24a80 80 0 1 1-83.66-83.67a80.21 80.21 0 0 1 83.66 83.67Z"/></symbol>
+        <symbol id="download" viewBox="0 0 24 24"><path fill="currentColor" d="M6.5 20q-2.275 0-3.887-1.575Q1 16.85 1 14.575q0-1.95 1.175-3.475Q3.35 9.575 5.25 9.15q.575-2.025 2.138-3.4Q8.95 4.375 11 4.075v8.075l-.9-.875Q9.825 11 9.413 11Q9 11 8.7 11.3q-.275.275-.275.7q0 .425.275.7l2.6 2.6q.3.3.7.3q.4 0 .7-.3l2.6-2.6q.275-.275.288-.688q.012-.412-.288-.712q-.275-.275-.687-.288q-.413-.012-.713.263l-.9.875V4.075q2.575.35 4.288 2.312Q19 8.35 19 11q1.725.2 2.863 1.487Q23 13.775 23 15.5q0 1.875-1.312 3.188Q20.375 20 18.5 20Z"/></symbol>
+        <symbol id="about" viewBox="0 0 48 48"><path fill="currentColor" d="M37 40H11l-6 6V12c0-3.3 2.7-6 6-6h26c3.3 0 6 2.7 6 6v22c0 3.3-2.7 6-6 6z"/><g fill="#fff"><path d="M22 20h4v11h-4z"/><circle cx="24" cy="15" r="2"/></g></symbol>
+        <symbol id="play" viewBox="0 0 512 512"><path fill="currentColor" d="M133 440a35.37 35.37 0 0 1-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0 1 35.77.45l247.85 148.36a36 36 0 0 1 0 61l-247.89 148.4A35.5 35.5 0 0 1 133 440Z"/></symbol>
+        <symbol id="stop" viewBox="0 0 512 512"><path fill="currentColor" d="M392 432H120a40 40 0 0 1-40-40V120a40 40 0 0 1 40-40h272a40 40 0 0 1 40 40v272a40 40 0 0 1-40 40Z"/></symbol>
+        <symbol id="reload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M19.933 13.041a8 8 0 1 1-9.925-8.788C13.907 3.251 17.943 5.26 19.433 9"/><path d="M20 4v5h-5"/></g></symbol>
+        <symbol id="copy" viewBox="0 0 1024 1024"><path fill="currentColor" d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM382 896h-.2L232 746.2v-.2h150v150z"/></symbol>
+        <symbol id="pc" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21q-.425 0-.712-.288Q1 20.425 1 20t.288-.712Q1.575 19 2 19h20q.425 0 .712.288q.288.287.288.712t-.288.712Q22.425 21 22 21Zm2-3q-.825 0-1.412-.587Q2 16.825 2 16V5q0-.825.588-1.413Q3.175 3 4 3h16q.825 0 1.413.587Q22 4.175 22 5v11q0 .825-.587 1.413Q20.825 18 20 18Z"/></symbol>
+    </svg>
+
+<script>
+function onReady() {
+    const $tab = document.getElementsByClassName('tabs')[0];
+    let $activeTab = $tab.getElementsByClassName('active')[0];
+    const $form = document.forms[0];
+    $tab.addEventListener('click', (e) => {
+        const id = e.target?.dataset.id;
+        if (!id || e.target === $activeTab) {
+            return;
+        }
+        e.target.classList.add('active');
+        $activeTab?.classList.remove('active');
+        $form.className = `form a-${id}`;
+        $activeTab = e.target;
+    });
+    const $log = $form.log;
+    const $logLevel = $form.logLevel;
+    $log.addEventListener('change', () => {
+        if ($log.checked) {
+            $logLevel.removeAttribute('disabled');
+        } else {
+            $logLevel.setAttribute('disabled', 'disabled');
+        }
+    });
+    document.getElementById('copyPac').addEventListener('click', () => v2s.copyPACUrl());
+}
+
+document.addEventListener('DOMContentLoaded', onReady);
+</script>
+</body>
+</html>

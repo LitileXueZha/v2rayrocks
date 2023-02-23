@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+rcedit.exe
+*.log
+tools/
+.vs*/
+runtime/
+
+out/

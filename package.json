@@ -1,0 +1,46 @@
+{
+  "name": "v2rayrocks",
+  "version": "1.0.0",
+  "description": "A desktop app built for V2ray.",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [
+    "v2ray",
+    "windows",
+    "linux",
+    "electron",
+    "proxy",
+    "anti-censorship"
+  ],
+  "author": "lititlexuezha",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "^22.0.0",
+    "esbuild": "^0.16.7"
+  },
+  "rocks-cfg": {
+    "dark": 0,
+    "settings": {
+      "socksPort": 10800,
+      "httpPort": 10801,
+      "pacPort": 10802,
+      "pacSource": "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+    },
+    "servers": [],
+    "subs": []
+  }
+}
